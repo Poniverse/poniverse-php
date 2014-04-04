@@ -1,10 +1,13 @@
 {
     "name": "poniverse/api",
-    "description": "",
+    "description": "PHP Library to access the Poniverse APi",
+    "keywords": ["laravel", "laravel4", "api"],
+    "type": "library",
+    "license": "MIT",
     "authors": [
         {
-            "name": "Poniverse",
-            "email": "developers@poniverse.net"
+            "name": "Adam Lavin",
+            "email": "adam@lavoaster.co.uk"
         }
     ],
     "require": {
