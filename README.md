@@ -1,4 +1,4 @@
-###poniverse-php
+#poniverse-php
 [![Build Status](https://travis-ci.org/Poniverse/poniverse-php.svg?branch=master)](https://travis-ci.org/Poniverse/poniverse-php) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Poniverse/poniverse-php/badges/quality-score.png?s=7d517521c412c0adf149be941eebb82b13051ec9)](https://scrutinizer-ci.com/g/Poniverse/poniverse-php/)
 
 ##Installation
