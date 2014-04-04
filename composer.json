@@ -1,0 +1,25 @@
+{
+    "name": "poniverse/api",
+    "description": "",
+    "authors": [
+        {
+            "name": "Poniverse",
+            "email": "developers@poniverse.net"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "4.1.*",
+        "guzzlehttp/guzzle": "4.*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.0.*",
+        "mockery/mockery": "dev-master"
+    },
+    "autoload": {
+        "psr-0": {
+            "Poniverse\\Api": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}
