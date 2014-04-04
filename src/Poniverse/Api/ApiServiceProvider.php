@@ -6,12 +6,12 @@ use Illuminate\Support\ServiceProvider;
 
 class ApiServiceProvider extends ServiceProvider {
 
-	/**
-	 * Indicates if loading of the provider is deferred.
-	 *
-	 * @var bool
-	 */
-	protected $defer = false;
+    /**
+     * Indicates if loading of the provider is deferred.
+     *
+     * @var bool
+     */
+    protected $defer = false;
 
     /**
      * Bootstrap the application events.
@@ -23,13 +23,13 @@ class ApiServiceProvider extends ServiceProvider {
         $this->package('poniverse/api', 'poniverse/api');
     }
 
-	/**
-	 * Register the service provider.
-	 *
-	 * @return void
-	 */
-	public function register()
-	{
+    /**
+     * Register the service provider.
+     *
+     * @return void
+     */
+    public function register()
+    {
         $this->app['poniverse.api'] = $this->app->share(function(Container $app) {
             $config = $app['config']->get('poniverse/api::config');
 
@@ -41,16 +41,16 @@ class ApiServiceProvider extends ServiceProvider {
                 ])
             );
         });
-	}
+    }
 
-	/**
-	 * Get the services provided by the provider.
-	 *
-	 * @return array
-	 */
-	public function provides()
-	{
-		return ['poniverse.api'];
-	}
+    /**
+     * Get the services provided by the provider.
+     *
+     * @return array
+     */
+    public function provides()
+    {
+        return ['poniverse.api'];
+    }
 
 }
