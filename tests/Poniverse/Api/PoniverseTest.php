@@ -32,4 +32,14 @@ class PoniverseTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('123', $poniverse->getAccessToken());
     }
+
+    public function testUserMethodReturnsUser()
+    {
+        $guzzleMock = m::mock('GuzzleHttp\Client');
+        $guzzleMock->shouldReceive('getBaseUrl')->once();
+
+        $poniverse = new \Poniverse\Api\Poniverse('123', 'abc', $guzzleMock);
+
+        $this->assertInstanceOf('Poniverse\Api\Resource\User', $poniverse->user());
+    }
 }
