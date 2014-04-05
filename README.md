@@ -9,7 +9,7 @@ Require this package in composer.json and update
 
 Open up ```app/config/app.php``` and add this line in your ```providers``` section
 
-````'Poniverse\Api\ApiServiceProvider',```
+```'Poniverse\Api\ApiServiceProvider',```
 
 In the same file add this line to the ```aliases``` section
 
