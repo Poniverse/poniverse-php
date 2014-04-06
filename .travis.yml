@@ -16,13 +16,14 @@ before_script:
   - composer install --prefer-source --no-interaction --dev
 
 script:
-  - phpunit --coverage-clover=coverage.clover
+  - mkdir -p build/log
+  - phpunit --coverage-clover=build/logs/clover.xml
 
 after_script:
 
   #Scrutinzer CI
   - wget https://scrutinizer-ci.com/ocular.phar
-  - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
+  - php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml
 
   #Coveralls
   - php bin/coveralls -p
