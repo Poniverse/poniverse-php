@@ -33,6 +33,6 @@ return [
     |
     */
 
-    'host_url' => 'http://api.poniverse.dev/{version}/',
+    'host_url' => 'http://api.poniverse.net/{version}/',
 
 ];
