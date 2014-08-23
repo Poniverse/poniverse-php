@@ -6,6 +6,30 @@
 Require this package in composer.json and update
 
     "poniverse/api": "dev-master"
+    
+###Normal Setup
+
+Example Code:
+
+    $config = [
+        'client_id' => 'YOUR_CLIENT_ID'
+        'client_secret' => 'YOUR_CLIENT_SECRET'
+        'host_url' => 'https://api.poniverse.net'
+    ];
+
+    $poniverse = new Poniverse(
+        $config['client_id'],
+        $config['client_secret'],
+        new Client([
+            'base_url' => [$config['host_url'], ['version' => 'v' . Poniverse::VERSION]]
+        ])
+    );
+    
+    $poniverse->setAccessToken('GRANTED_ACCESS_TOKEN');
+    
+    $user = $poniverse->user->get();
+    // $user['display_name'];
+    // $user['email'];
 
 ###Laravel 4 Setup
 
