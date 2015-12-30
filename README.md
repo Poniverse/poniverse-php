@@ -17,10 +17,6 @@ Add the service provider to your `providers` section, usually located in `config
 
     Poniverse\Api\ApiServiceProvider::class,
 
-If you want the facade, add this to the same file in the `aliases` section
-
-    'Poniverse' => 'Poniverse\Api\Facades\Poniverse',
-
 Publish the configuration and then edit it
 
     php artisan vendor:publish
