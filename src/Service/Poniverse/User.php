@@ -25,10 +25,6 @@ class User extends JsonApiService
 
     public function update(\Poniverse\Lib\Entity\Poniverse\User $user)
     {
-        if (! $user->isDirty()) {
-            throw new \Exception('Nothing has changed!');
-        }
-
         $request = $this->request('patch', $this->client->getPoniverseUrl().'/users/'.$user->id, [
             'body' => (new JsonApi())->serialize($user, 'users', true),
         ]);
