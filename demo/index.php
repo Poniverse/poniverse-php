@@ -2,13 +2,15 @@
 
 require '../vendor/autoload.php';
 
-$poniverseClient = new \Poniverse\Lib\Client(new GuzzleHttp\Client());
+$poniverseClient = new \Poniverse\Lib\Client(
+    'demo',
+    'demo',
+    new GuzzleHttp\Client()
+);
 
 // OAUTH DANCE
 
-$oauthProvider = new \Poniverse\Lib\OAuth2\PoniverseProvider([
-    'clientId' => 'demo',
-    'clientSecret' => 'demo',
+$oauthProvider = $poniverseClient->getOAuthProvider([
     'redirectUri' => 'http://lib.pv/index.php',
 ]);
 

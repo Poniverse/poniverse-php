@@ -4,11 +4,12 @@ namespace Poniverse\Lib;
 
 use GuzzleHttp\Client as HttpClient;
 use League\OAuth2\Client\Token\AccessToken;
+use Poniverse\Lib\OAuth2\PoniverseProvider;
 
 class Client
 {
     /**
-     * @var string|string
+     * @var string|null
      */
     protected $accessToken = null;
 
@@ -17,16 +18,34 @@ class Client
      */
     protected $httpClient;
 
+    /**
+     * Poniverse.net Client ID.
+     *
+     * @var string
+     */
+    private $clientId;
+
+    /**
+     * Poniverse.net Client Secret.
+     *
+     * @var string
+     */
+    private $clientSecret;
+
     protected $poniverseUrl = 'http://api.poniverse.local';
     protected $ponyfmUrl = 'https://pony.fm';
 
     /**
      * Initializes the Poniverse Api client.
      *
+     * @param string $clientId
+     * @param string $clientSecret
      * @param \GuzzleHttp\Client $httpClient
      */
-    public function __construct(HttpClient $httpClient)
+    public function __construct($clientId, $clientSecret, HttpClient $httpClient)
     {
+        $this->clientId = $clientId;
+        $this->clientSecret = $clientSecret;
         $this->httpClient = $httpClient;
     }
 
@@ -77,5 +96,21 @@ class Client
     public function getPonyfmUrl()
     {
         return $this->ponyfmUrl;
+    }
+
+    /**
+     * Returns the Poniverse OAuth Provider class.
+     *
+     * @param array $options
+     * @return PoniverseProvider
+     */
+    public function getOAuthProvider(array $options = [])
+    {
+        $options = array_merge([
+            'clientId' => $this->clientId,
+            'clientSecret' => $this->clientSecret,
+        ], $options);
+
+        return new PoniverseProvider($options);
     }
 }
