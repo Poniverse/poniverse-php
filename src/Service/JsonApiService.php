@@ -15,14 +15,14 @@ class JsonApiService extends Service
      */
     protected function handleError(ResponseInterface $response)
     {
-        $response = json_decode($response->getBody(), true);
+        $body = json_decode($response->getBody(), true);
 
         $errors = [];
 
         if (isset($errors['errors'])) {
             $errors = array_map(function ($error) {
                 return new Error($error['title'], $error['detail']);
-            }, $response['errors']);
+            }, $body['errors']);
         }
 
         throw new ApiException($response->getStatusCode(), $errors);
