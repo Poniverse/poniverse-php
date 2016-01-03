@@ -70,11 +70,21 @@ abstract class Entity
         return count($this->dirty) > 0;
     }
 
+    /**
+     * Returns all entity attributes.
+     *
+     * @return array
+     */
     public function getAttributes()
     {
         return $this->attributes;
     }
 
+    /**
+     * Returns all changed attributes.
+     *
+     * @return array
+     */
     public function getDirtyAttributes()
     {
         $attributes = [];

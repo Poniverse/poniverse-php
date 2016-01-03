@@ -31,9 +31,11 @@ $resourceOwner = $oauthProvider->getResourceOwner($accessToken);
 
 // API TEST
 
-$userService = new \Poniverse\Lib\Service\Poniverse\User($poniverseClient);
-
-$anotherUser = $userService->get('5582ba3b-46ab-46f8-95e1-00bb1b8748c7');
+try {
+    $anotherUser = $poniverseClient->poniverse()->users()->get('5582ba3b-46ab-46f8-95e1-00bb1b8748c7');
+} catch (\Poniverse\Lib\Errors\ApiException $e) {
+    dd($e->getMessage(), $e->getStatusCode());
+}
 
 $anotherUser->display_name = 'Test Dummy';
 

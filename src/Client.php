@@ -32,8 +32,15 @@ class Client
      */
     private $clientSecret;
 
-    protected $poniverseUrl = 'http://api.poniverse.local';
-    protected $ponyfmUrl = 'https://pony.fm';
+    /**
+     * Poniverse project url mappings.
+     *
+     * @var array
+     */
+    protected $urlMappings = [
+        'poniverse' => 'https://api.poniverse.net',
+        'ponyfm' => 'https://pony.fm',
+    ];
 
     /**
      * Initializes the Poniverse Api client.
@@ -41,12 +48,17 @@ class Client
      * @param string $clientId
      * @param string $clientSecret
      * @param \GuzzleHttp\Client $httpClient
+     * @param array $urlOverrides
      */
-    public function __construct($clientId, $clientSecret, HttpClient $httpClient)
+    public function __construct($clientId, $clientSecret, HttpClient $httpClient, $urlOverrides = [])
     {
         $this->clientId = $clientId;
         $this->clientSecret = $clientSecret;
         $this->httpClient = $httpClient;
+
+        if (count($urlOverrides) > 0) {
+            $this->urlMappings = array_merge($this->urlMappings, $urlOverrides);
+        }
     }
 
     /**
@@ -83,6 +95,11 @@ class Client
         return $this->httpClient;
     }
 
+    /**
+     * Returns the Autho.
+     *
+     * @return array
+     */
     public function getAuthHeader()
     {
         return ['Authorization' => 'Bearer '.$this->getAccessToken()];
@@ -90,12 +107,22 @@ class Client
 
     public function getPoniverseUrl()
     {
-        return $this->poniverseUrl;
+        return $this->urlMappings['poniverse'][$this->environment];
     }
 
     public function getPonyfmUrl()
     {
-        return $this->ponyfmUrl;
+        return $this->urlMappings['ponyfm'][$this->environment];
+    }
+
+    /**
+     * Returns the Poniverse.net service factory.
+     *
+     * @return Service\Poniverse\Factory
+     */
+    public function poniverse()
+    {
+        return new Service\Poniverse\Factory($this);
     }
 
     /**
