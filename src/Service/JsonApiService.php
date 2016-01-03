@@ -19,7 +19,7 @@ class JsonApiService extends Service
 
         $errors = [];
 
-        if (isset($errors['errors'])) {
+        if (isset($body['errors'])) {
             $errors = array_map(function ($error) {
                 return new Error($error['title'], $error['detail']);
             }, $body['errors']);
