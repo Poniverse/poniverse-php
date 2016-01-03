@@ -90,7 +90,7 @@ class PoniverseProvider extends AbstractProvider
     {
         if ($response->getStatusCode() >= 400) {
             throw new IdentityProviderException(
-                $data['message'] ?: $response->getReasonPhrase(),
+                isset($data['error_description']) ? $data['error_description'] : $response->getReasonPhrase(),
                 $response->getStatusCode(),
                 $response
             );
