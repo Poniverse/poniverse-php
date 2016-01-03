@@ -107,12 +107,12 @@ class Client
 
     public function getPoniverseUrl()
     {
-        return $this->urlMappings['poniverse'][$this->environment];
+        return $this->urlMappings['poniverse'];
     }
 
     public function getPonyfmUrl()
     {
-        return $this->urlMappings['ponyfm'][$this->environment];
+        return $this->urlMappings['ponyfm'];
     }
 
     /**
