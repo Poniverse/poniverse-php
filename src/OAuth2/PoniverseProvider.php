@@ -25,7 +25,7 @@ class PoniverseProvider extends AbstractProvider
      *
      * @var string
      */
-    public $apiDomain = 'http://api.poniverse.local';
+    public $apiDomain = 'https://api.poniverse.net';
 
     /**
      * Returns the base URL for authorizing a client.
