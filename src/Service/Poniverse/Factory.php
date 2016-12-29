@@ -25,4 +25,13 @@ class Factory
     {
         return new User($this->client);
     }
+
+    /**
+     * Returns the access token service.
+     *
+     * @return AccessTokenInfo
+     */
+    public function accessTokenInfo() {
+        return new AccessTokenInfo($this->client);
+    }
 }
