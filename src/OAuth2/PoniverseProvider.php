@@ -25,7 +25,7 @@ class PoniverseProvider extends AbstractProvider
      *
      * @var string
      */
-    public $apiDomain = 'https://api.poniverse.net';
+    public $apiDomain = 'https://api.poniverse.net/v1';
 
     /**
      * Returns the base URL for authorizing a client.
@@ -50,7 +50,7 @@ class PoniverseProvider extends AbstractProvider
      */
     public function getBaseAccessTokenUrl(array $params)
     {
-        return $this->apiDomain.'/oauth/access_token';
+        return $this->domain.'/oauth/access_token';
     }
 
     /**
@@ -62,7 +62,7 @@ class PoniverseProvider extends AbstractProvider
      */
     public function getResourceOwnerDetailsUrl(AccessToken $token)
     {
-        return $this->apiDomain.'/user';
+        return $this->apiDomain.'/users/me';
     }
 
     /**

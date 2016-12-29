@@ -18,8 +18,8 @@ class User extends Entity implements ResourceOwnerInterface
 
     public function hydrate(array $data)
     {
-        $this->id = $data['data']['id'];
-        $this->attributes = $data['data']['attributes'];
+        $this->id = $data['id'];
+        $this->attributes = $data;
     }
 
     /**
