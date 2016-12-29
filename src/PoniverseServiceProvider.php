@@ -1,6 +1,6 @@
 <?php
 
-namespace Poniverse\Api;
+namespace Poniverse\Lib;
 
 use GuzzleHttp\Client as HttpClient;
 use Illuminate\Contracts\Console\Application;

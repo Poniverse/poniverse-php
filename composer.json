@@ -23,7 +23,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Poniverse\\Api\\": "src/"
+            "Poniverse\\Lib\\": "src/"
         }
     },
     "minimum-stability": "stable"
