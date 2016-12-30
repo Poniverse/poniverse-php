@@ -18,11 +18,11 @@
 
 namespace Poniverse\Lib\Service\Poniverse;
 
+use League\OAuth2\Client\Token\AccessToken;
 use Poniverse\Lib\Errors\InvalidAccessTokenException;
 use Poniverse\Lib\Service\Service;
 
-class AccessTokenInfo extends Service {
-
+class Meta extends Service {
     /**
      * @param \Psr\Http\Message\ResponseInterface $response
      * @throws InvalidAccessTokenException
@@ -68,5 +68,48 @@ class AccessTokenInfo extends Service {
             ->setScopes($response['scope'])
             ->setClientId($response['client_id']);
         return $tokenInfo;
+    }
+
+    /**
+     * Generates a new refresh token for a user and updates their email address.
+     *
+     * @see \League\OAuth2\Client\Token\AccessToken
+     *
+     * @param int $poniverseUserId
+     * @param callable $tokenUpdater A callable that updates your stored access token
+     *                               and refresh token for the user. A League AccessToken
+     *                               object (see above) is passed as the callable's only argument.
+     * @param callable $emailAddressUpdater A callable that updates the user's locally
+     *                                      stored email address. The user's current
+     *                                      email address is passed as its only argument.
+     * @return void
+     */
+    public function syncAccount($poniverseUserId, $tokenUpdater, $emailAddressUpdater) {
+        $clientToken = $this->client->getOAuthProvider()->getAccessToken('client_credentials');
+        $this->client->setAccessToken($clientToken);
+
+        $request = $this->request(
+            'post',
+            $this->client->getPoniverseUrl() . "/v1/meta/sync-account?user_id={$poniverseUserId}",
+            [
+                'headers' => array_merge(
+                    ['Accept' => 'application/json'],
+                    $this->client->getAuthHeader()
+                )
+            ]
+        );
+
+        $response = json_decode($request->getBody(), true);
+        $tokenDetails = $response['token_info'];
+
+        $accessToken = new AccessToken([
+            'access_token'      => $tokenDetails['access_token'],
+            'expires_in'        => $tokenDetails['expires_in'],
+            'refresh_token'     => $tokenDetails['refresh_token'],
+            'resource_owner_id' => $poniverseUserId,
+        ]);
+
+        $tokenUpdater($accessToken);
+        $emailAddressUpdater($response['email']);
     }
 }

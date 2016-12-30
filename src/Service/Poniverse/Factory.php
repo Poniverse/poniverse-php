@@ -29,9 +29,9 @@ class Factory
     /**
      * Returns the access token service.
      *
-     * @return AccessTokenInfo
+     * @return Meta
      */
-    public function accessTokenInfo() {
-        return new AccessTokenInfo($this->client);
+    public function meta() {
+        return new Meta($this->client);
     }
 }
