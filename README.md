@@ -6,41 +6,17 @@
 Require this package in composer.json and update
 
     "poniverse/api": "dev-master"
-    
+
 ### Normal Setup
 
-Example Code:
+See `demo\index.php` for an example.
 
-    $config = [
-        'client_id' => 'YOUR_CLIENT_ID'
-        'client_secret' => 'YOUR_CLIENT_SECRET'
-        'host_url' => 'https://api.poniverse.net'
-    ];
+### Laravel 5 Setup
 
-    $poniverse = new Poniverse(
-        $config['client_id'],
-        $config['client_secret'],
-        new Client([
-            'base_url' => [$config['host_url'], ['version' => 'v' . Poniverse::VERSION]]
-        ])
-    );
-    
-    $poniverse->setAccessToken('GRANTED_ACCESS_TOKEN');
-    
-    $user = $poniverse->user->get();
-    // $user['display_name'];
-    // $user['email'];
+Add the service provider to your `providers` section, usually located in `config/app.php`.
 
-### Laravel 4 Setup
-
-Open up `app/config/app.php` and add this line in your `providers` section
-
-    'Poniverse\Api\ApiServiceProvider',
-
-In the same file add this line to the ```aliases``` section
-
-    'Poniverse' => 'Poniverse\Api\Facades\Poniverse',
+    Poniverse\Api\ApiServiceProvider::class,
 
 Publish the configuration and then edit it
 
-    php artisan config:publish poniverse/api
+    php artisan vendor:publish
